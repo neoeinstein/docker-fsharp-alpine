@@ -30,12 +30,13 @@ $ docker run -i -t neoeinstein/fsharp-alpine
 You can also invoke the interpreter to execute a file:
 
 ```bash
-$ echo 'let img = "Alpine Linux" in printfn "Hello World from fsharpi on %s" img' > qq.fsi
-$ docker run --rm -v "$(pwd)":/mnt neoeinstein/fsharp-alpine fsharpi --exec /mnt/qq.fsi
+$ echo 'let img = "Alpine Linux"' > qq.fsx
+$ echo 'printfn "Hello World from fsharpi on %s" img' >> qq.fsx
+$ docker run --rm -v "$(pwd)":/mnt neoeinstein/fsharp-alpine fsharpi --exec /mnt/qq.fsx
 ```
 
 That same file can be compiled into an executable and run:
 ```bash
-$ echo 'let img = "Alpine Linux" in printfn "Hello World from fsharpi on %s" img' > qq.fs
-$ docker run --rm -v "$(pwd)":/mnt neoeinstein/fsharp-alpine sh -c "fsharpc -out:/mnt/qq.exe /mnt/qq.fs && mono /mnt/qq.exe"
+$ echo 'let img = "Alpine Linux" in printfn "Hello World from fsharpc on %s" img' > qq.fs
+$ docker run --rm -v "$(pwd)":/mnt neoeinstein/fsharp-alpine sh -c "fsharpc -o:/mnt/qq.exe /mnt/qq.fs && mono /mnt/qq.exe"
 ```
